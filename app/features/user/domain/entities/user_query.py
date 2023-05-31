@@ -2,7 +2,7 @@ from datetime import datetime
 
 from pydantic import BaseModel, Field
 
-from app.features.user.domain.Entities.user_entity import UserEntity
+from app.features.user.domain.entities.user_entity import UserEntity
 
 
 class UserRead(BaseModel):
