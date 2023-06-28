@@ -18,6 +18,9 @@ class CreateUserUseCase(BaseUseCase[Tuple[UserCreate], UserRead]):
 
 class CreateUserUseCaseImpl(CreateUserUseCase):
 
+    def __init__(self, unit_of_work: UserUnitOfWork):
+        self.unit_of_work = unit_of_work
+
     def __call__(self, args: Tuple[UserCreate]) -> UserRead:
         data, = args
         user = UserEntity(
