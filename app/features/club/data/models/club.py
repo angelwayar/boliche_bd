@@ -24,7 +24,8 @@ class Club(Base):
             lat=self.lat,
             owner_id=self.owner_id,
             updated_at=self.updated_at,
-            created_at=self.created_at
+            created_at=self.created_at,
+            is_deleted=self.is_deleted,
         )
 
     def to_read_model(self) -> ClubRead:
@@ -38,6 +39,18 @@ class Club(Base):
             updated_at=self.updated_at,
             created_at=self.created_at,
         )
+
+    def to_dict(self):
+        return {
+            'id_': self.id_,
+            'owner_id': self.owner_id,
+            'name': self.name,
+            'long': self.long,
+            'lat': self.lat,
+            'is_deleted': self.is_deleted,
+            'updated_at': self.updated_at,
+            'created_at': self.created_at,
+        }
 
     @staticmethod
     def from_entity(club: ClubEntity) -> 'Club':
