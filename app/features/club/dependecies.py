@@ -9,6 +9,7 @@ from app.features.club.domain.repositories.club_repository import ClubRepository
 from app.features.club.domain.repositories.club_unit_of_work import ClubUnitOfWork
 from app.features.club.domain.service.club_query_service import ClubQueryService
 from app.features.club.domain.use_cases.create_club import CreateClubUseCase, CreateClubUseCaseImpl
+from app.features.club.domain.use_cases.delete_club import DeleteClubUseCase, DeleteClubUseCaseImpl
 from app.features.club.domain.use_cases.get_club import GetClubUseCase, GetClubUseCaseImpl
 from app.features.club.domain.use_cases.get_clubs import GetClubsUseCase, GetClubsUseCaseImpl
 from app.features.club.domain.use_cases.update_club import UpdateClubUseCase, UpdateClubUseCaseImpl
@@ -51,3 +52,9 @@ def get_update_club_use_case(
         club_unit_of_work: ClubUnitOfWork = Depends(get_club_unit_of_work)
 ) -> UpdateClubUseCase:
     return UpdateClubUseCaseImpl(unit_of_work=club_unit_of_work)
+
+
+def get_delete_use_case(
+        club_unit_of_work: ClubUnitOfWork = Depends(get_club_unit_of_work)
+) -> DeleteClubUseCase:
+    return DeleteClubUseCaseImpl(unit_of_work=club_unit_of_work)
