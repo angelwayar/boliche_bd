@@ -4,6 +4,7 @@ from typing import Any, Callable
 
 from app.features.club.domain.entities.club_command import ClubUpdate
 
+
 class ClubEntity:
     def __init__(
             self,
@@ -37,3 +38,12 @@ class ClubEntity:
             update_entity.__setattr__(attr_name, value)
 
         return update_entity
+
+    def mark_entity_as_deleted(self) -> 'ClubEntity':
+        if self.is_deleted:
+            raise
+
+        marked_entity = copy.deepcopy(self)
+        marked_entity.is_deleted = True
+
+        return marked_entity
