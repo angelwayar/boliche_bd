@@ -1,6 +1,6 @@
 from typing import Sequence
 
-from sqlalchemy import select, update
+from sqlalchemy import select, update, delete
 from sqlalchemy.orm import Session
 
 from app.features.club.data.models.club import Club
@@ -57,7 +57,11 @@ class ClubRepositoryImpl(ClubRepository):
         return result.to_entity()
 
     def delete_by_id(self, id_: int) -> ClubEntity:
-        pass
+        statement = delete(Club).filter_by(id_=id_).returning(*Club.__table__.columns)
+
+        result: Club = self.session.execute(statement=statement).scalar_one()
+
+        return result.to_entity()
 
     def find_by_owner_id(self, owner_id: int) -> Sequence[ClubEntity]:
         statement = select(Club).filter_by(owner_id=owner_id).order_by(Club.created_at.desc())
